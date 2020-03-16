@@ -197,10 +197,10 @@ class Mumble(threading.Thread):
                 self.connected = PYMUMBLE_CONN_STATE_NOT_CONNECTED
             
             # move to channel with most users
-            print(self.channels.values())
-            most_populous_channel = max(self.channels.values(), key=lambda c: len(c.get_users()))
-            if most_populous_channel != self.my_channel():
-                most_populous_channel.move_in()
+            if last_ping <= time.time():  # when it is time, send the ping
+                most_populous_channel = max(self.channels.values(), key=lambda c: len(c.get_users()))
+                if most_populous_channel != self.my_channel():
+                    most_populous_channel.move_in()
 
 
     def ping(self):
