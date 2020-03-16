@@ -308,7 +308,6 @@ class Mumble(threading.Thread):
             if self.connected == PYMUMBLE_CONN_STATE_AUTHENTICATING:
                 self.connected = PYMUMBLE_CONN_STATE_CONNECTED
                 self.callbacks(PYMUMBLE_CLBK_CONNECTED)
-                print('here')
                 self.ready_lock.release()  # release the ready-lock
 
         elif type == PYMUMBLE_MSG_TYPES_CHANNELREMOVE:
