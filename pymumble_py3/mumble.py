@@ -197,7 +197,7 @@ class Mumble(threading.Thread):
                 self.connected = PYMUMBLE_CONN_STATE_NOT_CONNECTED
             
             # move to channel with most users
-            most_populous_channel = max(self.channels().values(), key=lambda c: len(c.get_users()))
+            most_populous_channel = max(self.channels.values(), key=lambda c: len(c.get_users()))
             if most_populous_channel != self.my_channel():
                 most_populous_channel.move_in()
 
