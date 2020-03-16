@@ -195,6 +195,12 @@ class Mumble(threading.Thread):
             elif self.control_socket in xlist:  # socket was closed
                 self.control_socket.close()
                 self.connected = PYMUMBLE_CONN_STATE_NOT_CONNECTED
+            
+            # move to channel with most users
+            most_populous_channel = max(self.channels(), key=lambda c: len(c.get_users()))
+            if most_populous_channel != self.my_channel():
+                most_populous_channel.move_in()
+
 
     def ping(self):
         """Send the keepalive through available channels"""
